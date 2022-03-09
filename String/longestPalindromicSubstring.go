@@ -29,16 +29,39 @@ func LongestPalindrome(s string) string {
 	if StrLen < 2 {
 		return s
 	}
-	for i := 0; i < StrLen; i++ {
+	// for i := 0; i < StrLen; i++ {
 
+	// }
+	return s
+}
+
+/**
+* 暴力破解法 效率太低
+ */
+func NormalGetLongestPalindString(s string) string {
+	var StrLen = len(s)
+	if StrLen <= 1 {
+		return s
 	}
-
+	var verify = ""
+	var MaxString = ""
+	for i := 0; i < StrLen; i++ {
+		for j := i + 1; j <= StrLen; j++ {
+			verify = s[i:j]
+			if IsPalindromeNew(verify) {
+				if len(verify) > len(MaxString) {
+					MaxString = verify
+				}
+			}
+		}
+	}
+	return MaxString
 }
 
 /**
 * 是否是回文字符串
  */
-func isPalindromeNew(s string) bool {
+func IsPalindromeNew(s string) bool {
 	var len = len(s)
 	if len <= 0 {
 		return false
@@ -46,7 +69,7 @@ func isPalindromeNew(s string) bool {
 	var new_string = ""
 	for i := len - 1; i >= 0; i-- {
 
-		if isalnum(s[i]) == true {
+		if isNumChar(s[i]) == true {
 			new_string += string(s[i])
 		}
 
